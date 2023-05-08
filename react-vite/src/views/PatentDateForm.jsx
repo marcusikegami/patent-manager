@@ -30,6 +30,8 @@ const PatentDateForm = ({ onDateChange, patent }) => {
         })
       }, [])
 
+    //   This useEffect detects changes in the patentDates state and calls the onDateChange function which is passed 
+    // in as a prop from the PatentForm component to update the state of the patent object in the PatentForm component
       useEffect(() => {
         onDateChange({
             issue_date: `${patentDates.issue_date_Year}-${patentDates.issue_date_Month}-${patentDates.issue_date_Day}`,
