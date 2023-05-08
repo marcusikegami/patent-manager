@@ -24,7 +24,10 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('/users', UserController::class);
     Route::get('/patents', [PatentController::class, 'index']);
+    Route::post('/patents', [PatentController::class, 'store']);
     Route::get('/patents/{patent_number}', [PatentController::class, 'showByPatentNumber']);
+    Route::put('/patents/{patent_number}', [PatentController::class, 'update']);
+    Route::delete('/patents/{patent_number}', [PatentController::class, 'destroy']);
 });
 
 Route::post('/signup', [AuthController::class, 'signup']);

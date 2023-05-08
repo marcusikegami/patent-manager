@@ -39,19 +39,19 @@ const DefaultLayout = ({ children }) => {
                         <h1 className='text-lg font-mono drop-shadow-md'>Patent Tracker</h1>
                     </div>
                     <div className='flex items-center'>
-                        <p className='text-black'>{user.name} &nbsp; &nbsp;</p>
+                        <p className='text-black pr-4'>{user.name}</p>
                         <a href="#" className="bg-green-700 py-1 px-2 text-white rounded ease-in-out duration-300 hover:bg-green-600 hover:underline" onClick={logout}>Logout</a>
                     </div>
                 </header>
                 <div className='drop-shadow-lg w-full border border-gray-200' />
-                { notification &&
-                    <div className="notification">
-                        {notification}
-                    </div>
-                }
                 <main className='w-full flex justify-center items-center bg-gray-100'>
                     <Outlet /> {/* Outlet Components render the children components listed under <DefaultLayout>'s in the Router */}
                 </main>
+                { notification &&
+                    <div className="notification fixed bottom-10 right-10 rounded-md bg-green-500 text-white p-4">
+                        {notification}
+                    </div>
+                }
             </div>
         </div>
     )

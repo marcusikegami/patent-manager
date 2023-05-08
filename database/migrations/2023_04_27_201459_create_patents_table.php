@@ -20,12 +20,11 @@ return new class extends Migration
             $table->string('title');
             $table->text('abstract');
             $table->string('inventor');
-            $table->dateTime('filing_date');
-            $table->dateTime('issue_date');
-            $table->dateTime('expiration_date');
+            $table->date('filing_date');
+            $table->date('issue_date');
+            $table->date('expiration_date');
             $table->string('status');
             $table->string('jurisdiction');
-            $table->json('related_patents');
             $table->timestamps();
         });
     }

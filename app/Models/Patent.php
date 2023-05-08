@@ -26,12 +26,6 @@ class Patent extends Model
         'related_patents' => 'array',
     ];
 
-    protected $dates = [
-        'filing_date',
-        'issue_date',
-        'expiration_date',
-    ];
-
     public function scopeExpired($query)
     {
         return $query->where('expiration_date', '<', now());

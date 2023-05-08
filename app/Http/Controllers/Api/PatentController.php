@@ -42,16 +42,31 @@ class PatentController extends Controller
         return new PatentResource($patent);
     }
 
-    public function update(UpdatePatentRequest $request, Patent $patent)
+    public function update(Request $request, $patent_number)
     {
-        $data = $request->validated();
+        $patent = Patent::where('patent_number', $patent_number)->first();
+        
+        $rules = [
+            'patent_number' => 'required|unique:patents,patent_number,'.$patent->id,
+            'title' => 'required',
+            'abstract' => 'required',
+            'inventor' => 'required',
+            'filing_date' => 'required|date',
+            'issue_date' => 'nullable|date',
+            'expiration_date' => 'required|date',
+            'status' => 'required|in:pending,active,inactive,approved,rejected,abandoned,granted,withdrawn,infringed,litigated,in re-examtion,expired,revoked,expunged,lapsed,in examination',
+            'jurisdiction' => 'required',
+        ];
+
+        $data = $request->validate($rules);
         $patent->update($data);
 
         return new PatentResource($patent);
     }
 
-    public function destroy(Patent $patent)
+    public function destroy(Patent $patent, $patent_number)
     {
+        $patent = Patent::where('patent_number', $patent_number)->first();
         $patent->delete();
 
         return response(null, 204);

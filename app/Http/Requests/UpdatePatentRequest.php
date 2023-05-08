@@ -11,7 +11,7 @@ class UpdatePatentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class UpdatePatentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'patent_number' => 'required',
+            'title' => 'required',
+            'abstract' => 'required',
+            'inventor' => 'required',
+            'filing_date' => 'required|date',
+            'issue_date' => 'nullable|date',
+            'expiration_date' => 'required|date',
+            'status' => 'required|in:pending,active,inactive,approved,rejected,abandoned,granted,withdrawn,infringed,litigated,in re-examtion,expired,revoked,expunged,lapsed,in examination',
+            'jurisdiction' => 'required',
         ];
     }
 }
