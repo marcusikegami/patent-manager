@@ -84,6 +84,8 @@ return [
                 'log',
             ],
         ],
+
+        'view' => 'emails',
     ],
 
     /*
@@ -99,9 +101,13 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'name' => env('MAIL_FROM_NAME', 'example name'),
     ],
 
+    'reply_to' => [
+        'address' => env('MAIL_REPLY_TO_ADDRESS', 'hello@example.com'),
+        'name' => env('MAIL_REPLY_TO_NAME', 'example name'),
+    ],
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
@@ -117,7 +123,7 @@ return [
         'theme' => 'default',
 
         'paths' => [
-            resource_path('views/vendor/mail'),
+            resource_path('views/emails'),
         ],
     ],
 

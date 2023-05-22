@@ -28,7 +28,7 @@ class StorePatentRequest extends FormRequest
             'inventor' => 'required',
             'filing_date' => 'required|date_format:Y-m-d',
             'issue_date' => 'nullable|date_format:Y-m-d',
-            'expiration_date' => 'required|date_format:Y-m-d',
+            'expiration_date' => 'nullable|date_format:Y-m-d',
             'status' => 'required|in:pending,active,inactive,approved,rejected,abandoned,granted,withdrawn,infringed,litigated,in re-examtion,expired,revoked,expunged,lapsed,in examination',
             'jurisdiction' => 'required',
             'related_patents' => 'nullable|array'

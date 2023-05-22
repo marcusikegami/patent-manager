@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -39,6 +40,20 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'date',
+        'is_admin' => 'boolean',
+        'verified' => 'boolean',
     ];
+
+    protected $dateFormat = 'Y-m-d';
+
+    public function setCreatedAt($value)
+    {
+        $this->attributes['created_at'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setUpdatedAt($value)
+    {
+        $this->attributes['updated_at'] = Carbon::parse($value)->format('Y-m-d');
+    }
 }

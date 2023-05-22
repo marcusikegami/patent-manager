@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\PatentController;
+use App\Http\Controllers\Api\EmailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +18,18 @@ use App\Http\Controllers\Api\PatentController;
 |
 */
 
-Route::middleware('auth:sanctum')->group(function() {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('/users', UserController::class);
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users/create', [UserController::class, 'store']);
+    Route::put('/users/{user}/update', [UserController::class, 'update']);
+    Route::put('/users/{user}/update/admin', [UserController::class, 'updateAdminStatus']);
+    Route::delete('/users/{user}', [UserController::class, 'destroy']);
+
     Route::get('/patents', [PatentController::class, 'index']);
     Route::post('/patents', [PatentController::class, 'store']);
     Route::get('/patents/{patent_number}', [PatentController::class, 'showByPatentNumber']);

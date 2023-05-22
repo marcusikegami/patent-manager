@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->default(false); // add this line to determine the role. Default (false) is user but can be admin
+            $table->boolean('verified')->default(false); // add this line to determine if the user is verified. Default is false but can be true
             $table->rememberToken();
             $table->timestamps();
         });
