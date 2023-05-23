@@ -32,6 +32,6 @@ class WelcomeEmail extends Mailable
     public function build()
     {
         return $this->markdown('emails.welcome')
-            ->subject('Welcome to {company name} Patent Tracking System');
+            ->subject('Welcome to ' . env('APP_NAME') . '!');
     }
 }

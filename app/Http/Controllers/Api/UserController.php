@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\VerifyUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Mail\WelcomeEmail;
@@ -98,6 +99,30 @@ class UserController extends Controller
         try {
             $data = $request->validated();
             $user->is_admin = $data['is_admin'];
+            $user->save();
+
+            return new Response(new UserResource($user), 201);
+        } catch (\Exception $e) {
+            // Log the error
+            logger()->error('Error updating user: ' . $e->getMessage());
+
+            // Return an error response
+            return response()->json([
+                'error' => 'Failed to update user.'
+            ], 500);
+        }
+    }
+
+    public function verifyUser(VerifyUserRequest $request, User $user)
+    {
+        $user = $request->user();
+        logger($user);
+        try {
+            $data = $request->validated();
+            $user->verified = $data['verified'];
+            $user->name = $data['name']; // Assign the validated name
+            $user->password = $data['password']; // Assign the validated password
+
             $user->save();
 
             return new Response(new UserResource($user), 201);

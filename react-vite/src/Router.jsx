@@ -3,10 +3,12 @@ import Dashboard from "./views/Dashboard";
 import Login from "./views/Login";
 import PatentForm from "./views/PatentForm";
 import DefaultLayout from "./layouts/DefaultLayout";
-import Notifications from "./views/Notifications";
+import GuestLayout from "./layouts/GuestLayout";
+import Settings from "./views/Settings";
 import UserDashboard from "./views/UserDashboard";
 import UserForm from "./views/UserForm";
 import NewUserForm from "./views/NewUserForm";
+import UserVerificationForm from "./views/UserVerificationForm";
 
 const Router = createBrowserRouter([
     {
@@ -42,8 +44,18 @@ const Router = createBrowserRouter([
                 element: <UserForm />,
             },
             {
-                path: "/settings/notifications",
-                element: <Notifications />,
+                path: "/settings",
+                element: <Settings />,
+            },
+        ],
+    },
+    {
+        path: "/",
+        element: <GuestLayout />,
+        children: [
+            {
+                path: "/settings/verify_account",
+                element: <UserVerificationForm />,
             },
         ],
     },

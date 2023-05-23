@@ -22,13 +22,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+    Route::get('/user/test', [UserController::class, 'test']);
+    Route::put('/user/verify', [UserController::class, 'verifyUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('/users', UserController::class);
     Route::get('/users', [UserController::class, 'index']);
     Route::post('/users/create', [UserController::class, 'store']);
     Route::put('/users/{user}/update', [UserController::class, 'update']);
     Route::put('/users/{user}/update/admin', [UserController::class, 'updateAdminStatus']);
-    Route::delete('/users/{user}', [UserController::class, 'destroy']);
+    Route::delete('/users/{user}/delete', [UserController::class, 'destroy']);
+
 
     Route::get('/patents', [PatentController::class, 'index']);
     Route::post('/patents', [PatentController::class, 'store']);

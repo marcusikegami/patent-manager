@@ -6,7 +6,10 @@ import { useStateContext } from "../contexts/ContextProvider";
 const DefaultLayout = ({ children }) => {
     const { user, token, setUser, setToken, notification } = useStateContext();
 
-    if (!token) return <Navigate to="/login" />;
+    if (!token) {
+        return <Navigate to="/login" />;
+    } else if (user && user.verified === false)
+        return <Navigate to="/settings/verify_account" />;
 
     const logout = (event) => {
         event.preventDefault();
@@ -43,16 +46,16 @@ const DefaultLayout = ({ children }) => {
                 )}
                 <Link
                     className="py-1 px-2 text-white rounded ease-in-out duration-300 hover:bg-green-600 hover:underline"
-                    to="/settings/notifications"
+                    to="/settings"
                 >
-                    Notifications
+                    Settings
                 </Link>
             </aside>
             <div id="content" className="w-full">
                 <header className="flex items-center justify-between w-full p-8">
                     <div>
                         <h1 className="text-lg font-mono drop-shadow-md">
-                            Patent Tracker
+                            Titanium 6 Laravel/React Patent Tracking System
                         </h1>
                     </div>
                     <div className="flex items-center">
