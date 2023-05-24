@@ -28,8 +28,11 @@ const DefaultLayout = ({ children }) => {
     }, []);
 
     return (
-        <div id="default-layout" className="flex w-full min-h-screen">
-            <aside className="flex flex-col px-8 py-16 bg-green-700">
+        <div
+            id="default-layout"
+            className="flex flex-col min-[600px]:flex-row w-full min-h-screen"
+        >
+            <aside className="flex min-[600px]:flex-col px-8 py-4 min-[600px]:py-16 bg-green-700">
                 <Link
                     className="py-1 px-2 text-white rounded ease-in-out duration-300 hover:bg-green-600 hover:underline"
                     to="/patents"
@@ -58,8 +61,10 @@ const DefaultLayout = ({ children }) => {
                             Titanium 6 Laravel/React Patent Tracking System
                         </h1>
                     </div>
-                    <div className="flex items-center">
-                        <p className="text-black pr-4">{user.name}</p>
+                    <div className="flex max-[600px]:flex-col items-center">
+                        <p className="text-black  max-[600px]:pb-2 min-[600px]:pr-4">
+                            {user.name}
+                        </p>
                         <a
                             href="#"
                             className="bg-green-700 py-1 px-2 text-white rounded ease-in-out duration-300 hover:bg-green-600 hover:underline"

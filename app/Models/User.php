@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'notifications',
     ];
 
     /**
@@ -43,9 +44,23 @@ class User extends Authenticatable
         'created_at' => 'date',
         'is_admin' => 'boolean',
         'verified' => 'boolean',
+        'notifications' => 'json',
     ];
 
     protected $dateFormat = 'Y-m-d';
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->attributes['notifications'] = [
+            'day' => true,
+            'week' => true,
+            'month' => true,
+            'sixmonth' => false,
+            'year' => false,
+            'expired' => true,
+        ];
+    }
 
     public function setCreatedAt($value)
     {

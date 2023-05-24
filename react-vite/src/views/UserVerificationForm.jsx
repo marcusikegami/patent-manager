@@ -31,6 +31,23 @@ const UserVerificationForm = () => {
 
     const onSubmit = (ev) => {
         ev.preventDefault();
+        setLoading(true);
+
+        if (
+            _user.password !==
+            document.getElementById("password_confirmation").value
+        ) {
+            setErrors("Passwords do not match");
+            setLoading(false);
+            return;
+        }
+
+        if (_user.name === "") {
+            setErrors("Username cannot be empty");
+            setLoading(false);
+            return;
+        }
+
         const updatedUser = {
             ...user,
             name: _user.name,
@@ -40,7 +57,7 @@ const UserVerificationForm = () => {
         console.log(updatedUser);
         try {
             axiosClient
-                .put(`/user/verifiy`, updatedUser)
+                .put(`/user/verify`, updatedUser)
                 .then(() => {
                     setNotification("User was successfully verified!");
                     navigate("/");
@@ -88,7 +105,6 @@ const UserVerificationForm = () => {
                         </div>
                         <h3 className="text-lg mt-4">Username</h3>
                         <input
-                            defaultValue={user.name}
                             onChange={(ev) =>
                                 _setUser({
                                     ..._user,
@@ -96,7 +112,7 @@ const UserVerificationForm = () => {
                                 })
                             }
                             className="border-2 border-gray-200 w-full mt-1 mb-2 p-2"
-                            placeholder="Username"
+                            placeholder={user.name ? user.name : "Username"}
                         />
                         <h3 className="text-lg mt-4">Password</h3>
                         <input

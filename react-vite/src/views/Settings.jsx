@@ -5,18 +5,11 @@ import { useStateContext } from "../contexts/ContextProvider.jsx";
 
 const Settings = () => {
     const navigate = useNavigate();
-    let { id } = useParams(); // takes the user ID from the url /users/:id
-    const _userId = id ? id : null; // this assigns the patent number from the url parameter to _userId
-    const [_user, _setUser] = useState({
-        // this is the user state which will be used to fill the form, it requires an underscore because of the useStateContext
-        name: "",
-        email: "",
-        verified: false,
-        is_admin: false,
-    });
+
+    const [loading, setLoading] = useState(false); // this is for the loading message which will render on the card
+    const { user, setNotification } = useStateContext(); // this is for the notification message which will render on the bottom of the screen after a successful update
 
     const [errors, setErrors] = useState(null); // this is for the error messages which will render on the card
-
     useEffect(() => {
         // this useEffect will run when the errors state is changed and make sure to reset the errors state after 3.5 seconds
         setTimeout(() => {
@@ -24,54 +17,44 @@ const Settings = () => {
         }, 3500);
     }, [errors]);
 
-    const [loading, setLoading] = useState(false); // this is for the loading message which will render on the card
-    const { user, setNotification } = useStateContext(); // this is for the notification message which will render on the bottom of the screen after a successful update
+    const [_user, _setUser] = useState({
+        notifications: {
+            day: false,
+            week: false,
+            month: false,
+            sixmonth: false,
+            year: false,
+            expired: false,
+        },
+    });
 
-    // Sets the user data to fill the form if a user ID is present in the url
-    if (_userId) {
-        useEffect(() => {
-            setLoading(true);
-            axiosClient
-                .get(`/users/${_userId}`, user)
-                .then(({ data }) => {
-                    setLoading(false);
-                    setUser(data);
-                })
-                .catch(() => {
-                    setLoading(false);
-                });
-        }, []);
-    }
+    useEffect(() => {
+        setLoading(true);
+        axiosClient
+            .get("/user")
+            .then(({ data }) => {
+                _setUser(data);
+                setLoading(false);
+            })
+            .catch(() => {});
+    }, []);
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        if (_userId) {
-            axiosClient
-                .put(`/users/${user.id}/update`, user)
-                .then(() => {
-                    setNotification("User was successfully updated");
-                    navigate("/admin/users");
-                })
-                .catch((err) => {
-                    const response = err.response;
-                    if (response && response.status === 422) {
-                        setErrors(response.data.errors);
-                    }
-                });
-        } else {
-            axiosClient
-                .post("/users", user)
-                .then(() => {
-                    setNotification("User was successfully created");
-                    navigate("/admin/users");
-                })
-                .catch((err) => {
-                    const response = err.response;
-                    if (response && response.status === 422) {
-                        setErrors(response.data.errors);
-                    }
-                });
-        }
+        debugger;
+        setLoading(true);
+        axiosClient
+            .put(`/users/${user.id}/update`, _user)
+            .then(() => {
+                setNotification("User was successfully updated");
+                navigate("/admin/users");
+            })
+            .catch((err) => {
+                const response = err.response;
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
+            });
     };
 
     const handleDelete = () => {
@@ -98,7 +81,7 @@ const Settings = () => {
     };
 
     return (
-        <div className="w-[90%] max-w-[1024px] h-full">
+        <div className="w-[90%] max-w-[1024px] max-[600px]:h-screen h-full">
             <div className="card animated fadeInDown">
                 {loading && (
                     <div className="text-center flex justify-center items-center h-screen w-full">
@@ -117,51 +100,118 @@ const Settings = () => {
                         onSubmit={onSubmit}
                         className="flex flex-col bg-white my-16 py-4 px-8 drop-shadow-md"
                     >
-                        {!user.verified ? (
-                            <h1 className="text-2xl mb-4 mt-8 font-mono">
-                                New User Verification
-                            </h1>
-                        ) : (
-                            <h2 className="text-2xl mb-4 mt-8 font-mono">
-                                User Details
-                            </h2>
-                        )}
-                        <h3 className="text-lg mt-4">User Name</h3>
-                        <input
-                            value={user.name}
-                            onChange={(ev) =>
-                                setUser({
-                                    ...user,
-                                    name: ev.target.value,
-                                })
-                            }
-                            className="border-2 border-gray-200 w-full mt-1 mb-2 p-2"
-                            placeholder="User Name"
-                        />
-                        <h3 className="text-lg mt-4">Email</h3>
-                        <input
-                            value={user.email}
-                            onChange={(ev) =>
-                                setUser({
-                                    ...user,
-                                    email: ev.target.value,
-                                })
-                            }
-                            className="border-2 border-gray-200 w-full mt-1 mb-2 p-2"
-                            placeholder="User Email"
-                        />
-                        <h2>
-                            {user.verified ? (
-                                <span className="text-green-700">
-                                    User is verified
-                                </span>
-                            ) : (
-                                <span className="text-red-700">
-                                    User is not verified
-                                </span>
-                            )}
+                        <h2 className="text-xl mb-4 mt-8 font-mono">
+                            Notification Settings
                         </h2>
-
+                        <span>
+                            Checked boxes determine the time intervals by which
+                            email notifications will be sent to your email:
+                            <p className="text-green-600">{user.email}</p>
+                        </span>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">
+                                Post Expiration
+                            </h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.expired}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            expired: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">Day Before</h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.day}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            day: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">One Week</h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.week}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            week: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">One Month</h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.month}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            month: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">Six Months</h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.sixmonth}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            sixmonth: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
+                        <div className="flex items-center mt-2 py-1 px-2 border-b">
+                            <h3 className="text-md w-[125px]">One Year</h3>
+                            <input
+                                type="checkbox"
+                                checked={_user.notifications.year}
+                                onChange={(ev) =>
+                                    _setUser({
+                                        ..._user,
+                                        notifications: {
+                                            ..._user.notifications,
+                                            year: ev.target.checked,
+                                        },
+                                    })
+                                }
+                                className="border-2 border-gray-200 w-min ml-4"
+                            />
+                        </div>
                         <div className="flex justify-between mt-4">
                             <div className="flex">
                                 <button

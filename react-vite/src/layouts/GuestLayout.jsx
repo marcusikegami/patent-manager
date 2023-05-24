@@ -22,7 +22,7 @@ export default function GuestLayout() {
     return (
         <div
             id="default-layout"
-            className="flex flex-col min-[600px]:flex-row w-full min-h-screen "
+            className="flex flex-col min-[600px]:flex-row w-full min-h-screen"
         >
             <aside className="flex flex-col px-8 py-4 min-[600px]:py-16 bg-green-700">
                 {user.is_admin === true && (

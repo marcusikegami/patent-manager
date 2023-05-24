@@ -22,7 +22,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
-    Route::get('/user/test', [UserController::class, 'test']);
     Route::put('/user/verify', [UserController::class, 'verifyUser']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::apiResource('/users', UserController::class);

@@ -62,7 +62,7 @@ const Dashboard = () => {
     };
 
     return (
-        <div id="dashboard" className="py-16 min-h-screen">
+        <div id="dashboard" className="py-16 mx-4 min-h-screen">
             {loading && (
                 <div className="text-center flex justify-center items-center h-screen w-full">
                     <p className="bg-white py-2 px-8 rounded-md">Loading...</p>

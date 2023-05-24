@@ -26,11 +26,16 @@ class VerifyUserRequest extends FormRequest
             'name' => ['required', 'string', 'max:55'],
             'email' => ['required', 'email', 'unique:users,email,' . $this->id],
             'password' => [
-                'confirmed',
                 Password::min(8)
             ],
             'verified' => ['required', 'boolean'],
             'is_admin' => ['required', 'boolean'],
+            'notifications' => ['required', 'array'],
+            'notifications.year' => ['nullable', 'boolean'],
+            'notifications.6months' => ['nullable', 'boolean'],
+            'notifications.month' => ['nullable', 'boolean'],
+            'notifications.day' => ['nullable', 'boolean'],
+            'notifications.expired' => ['nullable', 'boolean'],
             'created_at' => ['required', 'date'],
         ];
     }

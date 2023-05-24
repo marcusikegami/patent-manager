@@ -35,6 +35,13 @@ class UpdateUserRequest extends FormRequest
             ],
             'verified' => ['required', 'boolean'],
             'is_admin' => ['required', 'boolean'],
+            'notifications' => ['required', 'array'],
+            'notifications.year' => ['boolean'],
+            'notifications.sixmonth' => ['boolean'],
+            'notifications.month' => ['boolean'],
+            'notifications.week' => ['boolean'],
+            'notifications.day' => ['boolean'],
+            'notifications.expired' => ['boolean'],
             'created_at' => ['required', 'date'],
         ];
     }

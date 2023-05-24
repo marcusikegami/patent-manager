@@ -19,6 +19,14 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make(env('ADMIN_PASSWORD', 'password')),
             'is_admin' => true,
             'verified' => true,
+            'notifications' => [
+                'year' => false,
+                'sixmonth' => false,
+                'month' => true,
+                'week' => true,
+                'day' => true,
+                'expired' => true,
+            ],
             'created_at' => date('Y-m-d'),
         ]);
     }
