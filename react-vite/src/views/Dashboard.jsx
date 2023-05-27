@@ -48,11 +48,15 @@ const Dashboard = () => {
 
     const detectStatus = (date) => {
         const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
         const expirationDate = new Date(date);
+        expirationDate.setHours(0, 0, 0, 0);
+        console.log(expirationDate, today);
         const daysLeft = Math.floor(
             (expirationDate - today) / (1000 * 60 * 60 * 24)
         );
-        if (daysLeft <= 0) {
+        if (daysLeft <= -1) {
             return "Expired";
         } else if (daysLeft <= 30) {
             return "Expiring Soon";

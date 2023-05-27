@@ -81,7 +81,7 @@ const Settings = () => {
     };
 
     return (
-        <div className="w-[90%] max-w-[1024px] max-[600px]:h-screen h-full">
+        <div className="w-[90%] max-w-[1024px] h-screen">
             <div className="card animated fadeInDown">
                 {loading && (
                     <div className="text-center flex justify-center items-center h-screen w-full">

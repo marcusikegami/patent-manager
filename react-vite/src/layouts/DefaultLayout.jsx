@@ -75,7 +75,7 @@ const DefaultLayout = ({ children }) => {
                     </div>
                 </header>
                 <div className="drop-shadow-lg w-full border border-gray-200" />
-                <main className="w-full flex justify-center items-center bg-gray-100">
+                <main className="flex justify-center items-center bg-gray-100">
                     <Outlet />{" "}
                     {/* Outlet Components render the children components listed under <DefaultLayout>'s in the Router */}
                 </main>

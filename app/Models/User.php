@@ -24,6 +24,11 @@ class User extends Authenticatable
         'password',
         'notifications',
     ];
+    // The default attributes for notifications JSON object
+
+    protected $attributes = [
+        'notifications' => '{"day": true, "week": true, "month": true, "sixmonth": false, "year": false, "expired": true}'
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -48,27 +53,4 @@ class User extends Authenticatable
     ];
 
     protected $dateFormat = 'Y-m-d';
-
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-        $this->attributes['notifications'] = [
-            'day' => true,
-            'week' => true,
-            'month' => true,
-            'sixmonth' => false,
-            'year' => false,
-            'expired' => true,
-        ];
-    }
-
-    public function setCreatedAt($value)
-    {
-        $this->attributes['created_at'] = Carbon::parse($value)->format('Y-m-d');
-    }
-
-    public function setUpdatedAt($value)
-    {
-        $this->attributes['updated_at'] = Carbon::parse($value)->format('Y-m-d');
-    }
 }

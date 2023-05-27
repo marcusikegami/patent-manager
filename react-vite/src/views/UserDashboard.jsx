@@ -63,7 +63,7 @@ const UserDashboard = () => {
     };
 
     return (
-        <div id="dashboard" className="py-16 min-h-screen">
+        <div id="dashboard" className="py-16 mx-auto min-h-screen">
             {loading && (
                 <div className="text-center flex justify-center items-center h-screen w-full">
                     <p className="bg-white py-2 px-8 rounded-md">Loading...</p>
@@ -90,15 +90,15 @@ const UserDashboard = () => {
                     </div>
                     <div
                         id="table"
-                        className="flex column bg-white mx-4 drop-shadow"
+                        className="flex column bg-white drop-shadow text-sm"
                     >
-                        <table>
-                            <thead className="bg-green-700 text-white w-full rounded-t-md">
+                        <table className="w-full">
+                            <thead className="bg-green-700 text-white rounded-t-md">
                                 <tr className="">
-                                    <th className="py-1 px-4">Name</th>
-                                    <th className="py-1 px-4">Email</th>
-                                    <th className="py-1 px-4">Verified</th>
-                                    <th className="py-1 px-4">Admin</th>
+                                    <th className="py-1">Name</th>
+                                    <th className="py-1">Email</th>
+                                    <th className="py-1 px-2">Verified</th>
+                                    <th className="py-1 px-2">Admin</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,22 +110,22 @@ const UserDashboard = () => {
                                                 key={user.name}
                                                 className="hover:bg-green-100 transition-all duration-300 cursor-pointer"
                                             >
-                                                <td className="p-2 border-b border-gray-300">
+                                                <td className="px-1 py-3 border-b border-gray-300 max-[440px]:max-w-[100px] overflow-x-auto">
                                                     {user.name}
                                                 </td>
-                                                <td className="p-2 border-b border-gray-300 hover:underline">
+                                                <td className="px-1 py-3 border-b border-gray-300 hover:underline max-[440px]:max-w-[140px] overflow-x-auto">
                                                     <Link
                                                         to={`/admin/users/${user.id}`}
                                                     >
                                                         {user.email}
                                                     </Link>
                                                 </td>
-                                                <td className="p-2 border-b text-center border-gray-300">
+                                                <td className="px-1 py-3 border-b text-center border-gray-300">
                                                     {user.verified
                                                         ? "Yes"
                                                         : "No"}
                                                 </td>
-                                                <td className="p-2 border-b text-center border-gray-300">
+                                                <td className="px-1 py-3 border-b text-center border-gray-300">
                                                     <input
                                                         type="checkbox"
                                                         checked={user.is_admin}
