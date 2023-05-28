@@ -49,7 +49,6 @@ const PatentDateForm = ({ onDateChange, patent }) => {
             ...patentDates,
              [name]: value,
             });
-            console.log(patentDates);
       };
 
     return (

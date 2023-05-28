@@ -41,7 +41,6 @@ const Settings = () => {
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        debugger;
         setLoading(true);
         axiosClient
             .put(`/users/${user.id}/update`, _user)

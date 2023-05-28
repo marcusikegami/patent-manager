@@ -35,7 +35,6 @@ const UserDashboard = () => {
     }, []);
 
     const handleAdminChange = (user) => {
-        console.log(user);
         setLoading(true);
         axiosClient
             .put(`/users/${user.id}/update/admin`, {

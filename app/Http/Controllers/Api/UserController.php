@@ -121,8 +121,9 @@ class UserController extends Controller
             $data = $request->validated();
             $user->verified = $data['verified'];
             $user->name = $data['name']; // Assign the validated name
-            $user->password = $data['password']; // Assign the validated password
-
+            if (isset($data['password'])) {
+                $user->password = Hash::make($data['password']); // Assign the validated password
+            }
             $user->save();
 
             return new Response(new UserResource($user), 201);

@@ -6,6 +6,7 @@ use App\Console\Commands\SendExpirationNotifications;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use DateTimeZone;
 
 class Kernel extends ConsoleKernel
 {
@@ -17,12 +18,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('send:expiration-notifications')->daily();
-        $schedule->command('send:day-before-notifications')->daily();
-        $schedule->command('send:week-before-notifications')->daily();
-        $schedule->command('send:month-before-notifications')->daily();
-        $schedule->command('send:six-months-before-notifications')->daily();
-        $schedule->command('send:year-before-notifications')->daily();
+        $schedule->command('send:expiration-notifications')->dailyAt('06:00');
+        $schedule->command('send:day-before-notifications')->dailyAt('06:00');
+        $schedule->command('send:week-before-notifications')->dailyAt('06:00');
+        $schedule->command('send:month-before-notifications')->dailyAt('06:00');
+        $schedule->command('send:six-months-before-notifications')->dailyAt('06:00');
+        $schedule->command('send:year-before-notifications')->dailyAt('06:00');
     }
 
     /**

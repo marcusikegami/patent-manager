@@ -54,7 +54,6 @@ const UserVerificationForm = () => {
             password: _user.password,
             verified: true,
         };
-        console.log(updatedUser);
         try {
             axiosClient
                 .put(`/user/verify`, updatedUser)

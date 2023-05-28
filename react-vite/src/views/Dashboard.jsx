@@ -52,7 +52,6 @@ const Dashboard = () => {
 
         const expirationDate = new Date(date);
         expirationDate.setHours(0, 0, 0, 0);
-        console.log(expirationDate, today);
         const daysLeft = Math.floor(
             (expirationDate - today) / (1000 * 60 * 60 * 24)
         );

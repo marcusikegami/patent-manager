@@ -27,10 +27,8 @@ export default function () {
                 setToken(data.token);
             }) // There is no need to redirect the user to a specific page because the useStateContext function will redirect the user to the dashboard page
             .catch((error) => {
-                debugger;
                 console.error;
                 const response = error.response;
-                console.log(response);
                 if (response && response.status === 422) {
                     if (response.data.errors) {
                         setErrors(response.data.errors);
