@@ -4,6 +4,7 @@
         "dev": "vite",
         "build": "vite build",
         "install": "composer install && cd react-vite && npm install",
+        "migrate": "php artisan migrate:fresh --seed",
         "serve": "php artisan serve",
         "watch": "cd react-vite && npm run dev"
     },
