@@ -35,6 +35,10 @@ const UserDashboard = () => {
     }, []);
 
     const handleAdminChange = (user) => {
+        const confirm = window.confirm(
+            "Are you sure you want to change this user's admin status?"
+        );
+        if (!confirm) return;
         setLoading(true);
         axiosClient
             .put(`/users/${user.id}/update/admin`, {

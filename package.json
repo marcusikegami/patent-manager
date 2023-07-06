@@ -2,11 +2,32 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "install": "composer install && cd react-vite && npm install",
+        "serve": "php artisan serve",
+        "watch": "cd react-vite && npm run dev"
     },
     "devDependencies": {
         "axios": "^1.1.2",
         "laravel-vite-plugin": "^0.7.2",
         "vite": "^4.0.0"
-    }
+    },
+    "name": "patent-manager",
+    "version": "1.0.0",
+    "main": "vite.config.js",
+    "directories": {
+        "test": "tests"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/marcusikegami/patent-manager.git"
+    },
+    "keywords": [],
+    "author": "Marcus Ikegami",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/marcusikegami/patent-manager/issues"
+    },
+    "homepage": "https://github.com/marcusikegami/patent-manager#readme",
+    "description": ""
 }
