@@ -41,7 +41,7 @@ The database is a MySQL database, and the credentials can be configured in the .
 
 ### .env
 
-The .env file is not included in the repository, however, a .env.example file is included. This file can be copied and renamed to .env, and the values can be changed to match the local environment. The .env file is used to store the database credentials, and the email credentials.
+The .env file is not included in the repository, however, a .env.example file is included. This file can be copied and renamed to .env, and the values can be changed to match the local environment. The .env file is used to store the database and the email credentials.
 
 In the root directory rename the .env.example file to .env and configure the database and email credentials. Next, navigate to /react-vite and rename the .env.example file to .env and configure the REACT_APP_API_URL to match the Laravel server.
 It is set to http://localhost:8000/api by default.
