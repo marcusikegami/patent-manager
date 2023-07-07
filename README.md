@@ -1,8 +1,29 @@
 # Patent Manager
 
+[![License](https://img.shields.io/github/license/marcusikegami/patent-manager)](LICENSE.txt)
+
+## Table of Contents
+
+-   [Description](#description)
+-   [Usage](#usage)
+-   [Installation](#installation)
+-   [Database](#database)
+-   [.env](#env)
+-   [Migrations](#migrations)
+-   [Seeders](#seeders)
+-   [Running the servers](#running-the-servers)
+-   [Note on functionality](#note-on-functionality)
+-   [Questions](#questions)
+-   [License](#license)
+
 ## Description
 
 A simple web application to manage patents.
+
+## Usage
+
+This software can be used to manage a team of persons in charge of patent keeping.
+The software allows for the creation of users, and the creation of patents.
 
 ## Installation
 
@@ -16,7 +37,7 @@ to install the depencies, run `npm install` after cloning the repository.
 
 ### Database
 
-The database is a MySQL database, and the schema is located in the `database` folder.
+The database is a MySQL database, and the credentials can be configured in the .env file.
 
 ### .env
 
@@ -43,7 +64,21 @@ Navigate to http://localhost:3000 to view the client.
 default user is 'admin@example.com'
 default password is 'password'.
 
-### Note
+### Note on functionality
 
 Email functionalities will not work unless the .env is properly configured with a compatible email.
 refer to .env.example and save it as .env when configured
+
+## Questions
+
+[GitHub](https://github.com/marcusikegami)
+
+**mikegami.github@gmail.com**
+
+Any questions regarding this application can be sent to mikegami.github@gmail.com
+
+## License
+
+Copyright (c) 2023 by Marcus Ikegami
+
+Licensed under the [MIT](LICENSE.txt) license.
